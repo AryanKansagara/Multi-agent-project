@@ -6,8 +6,8 @@
 // ========================================
 // State Management
 // ========================================
-let todos = [];
-let nextId = 1;
+export let todos = [];
+export let nextId = 1;
 
 // ========================================
 // DOM Elements (cached for performance)
@@ -51,7 +51,7 @@ todoForm.addEventListener('submit', (e) => {
  * - Creates todo object with unique ID
  * - Adds to state and clears input
  */
-function addTodo() {
+export function addTodo() {
     const input = todoInput.value.trim();
 
     // Validation: reject empty or whitespace-only input
@@ -88,7 +88,7 @@ function addTodo() {
  * Toggle completion status of a todo
  * Updates the completed state and re-renders UI
  */
-function toggleTodo(id) {
+export function toggleTodo(id) {
     const todo = todos.find((t) => t.id === id);
     if (todo) {
         todo.completed = !todo.completed;
@@ -100,7 +100,7 @@ function toggleTodo(id) {
 /**
  * Delete a todo from the list
  */
-function deleteTodo(id) {
+export function deleteTodo(id) {
     todos = todos.filter((t) => t.id !== id);
     saveTodosToStorage();
     render();
@@ -117,7 +117,7 @@ function deleteTodo(id) {
  * - Shows/hides empty state based on list length
  * - Updates UI on state changes
  */
-function render() {
+export function render() {
     // Clear the list
     todoList.innerHTML = '';
 
@@ -139,7 +139,7 @@ function render() {
  * Create a single todo list item element
  * Includes checkbox, text, and delete button
  */
-function createTodoElement(todo) {
+export function createTodoElement(todo) {
     const li = document.createElement('li');
     li.className = 'todo-item';
     if (todo.completed) {
@@ -185,7 +185,7 @@ function createTodoElement(todo) {
  * Save todos array to localStorage
  * Stores todos as JSON string with metadata
  */
-function saveTodosToStorage() {
+export function saveTodosToStorage() {
     const data = {
         todos: todos,
         nextId: nextId,
@@ -197,7 +197,7 @@ function saveTodosToStorage() {
  * Load todos from localStorage
  * Restores state and nextId for proper ID generation
  */
-function loadTodosFromStorage() {
+export function loadTodosFromStorage() {
     const stored = localStorage.getItem('todoAppData');
     if (stored) {
         try {
